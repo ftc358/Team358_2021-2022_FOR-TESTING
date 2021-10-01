@@ -11,9 +11,9 @@ public class Test_TeleOp extends LinearOpMode{
     public DcMotor lb;
     public DcMotor rf;
     public DcMotor rb;
+    //TODO: put these declarations into a new class
 
-    public final double slowDriveSpeed = 0.2;
-//    public final double drive_threshold = 0.5;
+    public final double slowDriveFactor = 0.3;
     public boolean precision = false;
 
     public void runOpMode() throws InterruptedException {
@@ -54,11 +54,19 @@ public class Test_TeleOp extends LinearOpMode{
 
             // set left motors to left drive power
             if(precision) {
-                lf.setPower(slowDriveSpeed);
-                lb.setPower(slowDriveSpeed);
+                lf.setPower(leftDrive * slowDriveFactor);
+                lb.setPower(leftDrive * slowDriveFactor);
             }else{
                 lf.setPower(leftDrive);
                 lb.setPower(leftDrive);
+            }
+            // set right motors to right drive power
+            if(precision) {
+                rf.setPower(rightDrive * slowDriveFactor);
+                rb.setPower(rightDrive * slowDriveFactor);
+            }else{
+                rf.setPower(rightDrive);
+                rb.setPower(rightDrive);
             }
 
             telemetry.addData("left power", leftDrive);
