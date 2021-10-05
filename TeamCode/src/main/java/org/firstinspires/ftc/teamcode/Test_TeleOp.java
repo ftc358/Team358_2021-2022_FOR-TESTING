@@ -41,7 +41,7 @@ public class Test_TeleOp extends LinearOpMode{
                 if (precision) {
                     precision = false;
                 }
-                else if (!precision){
+                else if (precision == false){
                     precision = true;
                 }
             }
@@ -71,9 +71,9 @@ public class Test_TeleOp extends LinearOpMode{
                 rb.setPower(rightDrive);
             }
 
-            telemetry.addData("left power", leftDrive);
-            telemetry.addData("right power", rightDrive);
-            telemetry.update();
+//            telemetry.addData("left power", leftDrive);
+//            telemetry.addData("right power", rightDrive);
+//            telemetry.update();
 
         }
     }
