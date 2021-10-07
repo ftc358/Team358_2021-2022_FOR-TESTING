@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode;
 
-//import java.sql.Timestamp;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -19,7 +18,7 @@ public class Test_TeleOp extends LinearOpMode{
 
     public double driveFactor = 0.3;
     public long lastTime = System.currentTimeMillis();
-    public int timeElapsed = 2000;
+    public int timeElapsed = 2000; // this is in milliseconds
 
     public void runOpMode() throws InterruptedException {
 
