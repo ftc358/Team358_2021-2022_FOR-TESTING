@@ -11,6 +11,8 @@ public class KevinTest_Autonomous extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         motor1 = hardwareMap.dcMotor.get("motor1");
 
+        waitForStart();
+
         while (opModeIsActive()) {
             int inches = 10;
             double FORWARD_DISTANCE = inches * 9; // inches * FORWARD_ADJUST
@@ -30,7 +32,10 @@ public class KevinTest_Autonomous extends LinearOpMode {
             //Set to RUN_TO_POSITION mode
             motor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
+//            private String currentPosition = Integer.toString(motor1.getCurrentPosition());
+
             telemetry.addData("motor1's power is set to 1", "running");
+            telemetry.addData("Current Position", motor1.getCurrentPosition());
             telemetry.update();
 
             while (motor1.isBusy()) {
