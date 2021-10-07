@@ -1,8 +1,10 @@
 package org.firstinspires.ftc.teamcode;
 
+//import java.sql.Timestamp;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import java.lang.*;
 
 // TODO: change to autonomous
 
@@ -15,8 +17,9 @@ public class Test_TeleOp extends LinearOpMode{
     public DcMotor rb;
     //TODO: put these declarations into a new class
 
-    public final double slowDriveFactor = 0.3;
-    public boolean precision = false;
+    public double driveFactor = 0.3;
+    public long lastTime = System.currentTimeMillis();
+    public int timeElapsed = 2000;
 
     public void runOpMode() throws InterruptedException {
 
@@ -36,45 +39,48 @@ public class Test_TeleOp extends LinearOpMode{
         waitForStart();
         while(opModeIsActive()){
 
+//            telemetry.addData("millisecond", System.currentTimeMillis());
+//            telemetry.addData("millisecond", lastTime);
+
             // define slow drive
             if (gamepad1.right_bumper){
-                if (precision) {
-                    precision = false;
-                }
-                else if (precision == false){
-                    precision = true;
+                if (System.currentTimeMillis() - lastTime > timeElapsed){
+                    driveFactor = switchDrive(driveFactor);
+                    lastTime = System.currentTimeMillis();
                 }
             }
 
-            telemetry.addData("precision status", precision);
-            telemetry.update();
-
+            // add telemetry
+            telemetry.addData("precision status", driveFactor);
 
             // define drive power
             double leftDrive = gamepad1.left_stick_y;
             double rightDrive = gamepad1.right_stick_y;
+            double finalLeft = leftDrive * driveFactor;
+            double finalRight = rightDrive * driveFactor;
 
-            // set left motors to left drive power
-            if(precision) {
-                lf.setPower(leftDrive * slowDriveFactor);
-                lb.setPower(leftDrive * slowDriveFactor);
-            }else{
-                lf.setPower(leftDrive);
-                lb.setPower(leftDrive);
-            }
-            // set right motors to right drive power
-            if(precision) {
-                rf.setPower(rightDrive * slowDriveFactor);
-                rb.setPower(rightDrive * slowDriveFactor);
-            }else{
-                rf.setPower(rightDrive);
-                rb.setPower(rightDrive);
-            }
+            // set motors to drive power
+            lf.setPower(finalLeft);
+            lb.setPower(finalLeft);
+            rf.setPower(finalRight);
+            rb.setPower(finalRight);
 
-//            telemetry.addData("left power", leftDrive);
-//            telemetry.addData("right power", rightDrive);
-//            telemetry.update();
+            // add telemetry
+            telemetry.addData("left power", finalLeft);
+            telemetry.addData("right power", finalRight);
+            telemetry.update();
 
         }
     }
+
+    public double switchDrive(double df){
+        if (df == 0.3) {
+            return 1;
+        }
+        else if (df == 1){
+            return 0.3;
+        }
+        return df;
+    }
+
 }
