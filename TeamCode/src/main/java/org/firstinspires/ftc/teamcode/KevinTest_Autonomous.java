@@ -42,5 +42,5 @@ public class KevinTest_Autonomous extends LinearOpMode {
                 //Wait Until Target Position is Reached
             }
         }
-    }]
+    }
 }
