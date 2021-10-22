@@ -22,6 +22,6 @@ public class ServoTest extends LinearOpMode {
             telemetry.addData("servo1's power is set to 1", "running");
             telemetry.update();
         }
-    }]
+    }
 }
 
