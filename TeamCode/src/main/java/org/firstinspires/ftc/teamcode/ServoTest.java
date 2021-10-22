@@ -17,6 +17,7 @@ public class ServoTest extends LinearOpMode {
             telemetry.addData("opModeIsActive", opModeIsActive());
             telemetry.update();
 
+            servo1.setDirection(CRServo.Direction.REVERSE);
             servo1.setPower(1);
 
             telemetry.addData("servo1's power is set to 1", "running");
