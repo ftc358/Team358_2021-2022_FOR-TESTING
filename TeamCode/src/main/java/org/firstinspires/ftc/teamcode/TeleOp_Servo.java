@@ -23,8 +23,6 @@ public class TeleOp_Servo extends LinearOpMode {
 
     public void runOpMode() throws InterruptedException {
 
-        servo1 = hardwareMap.crservo.get("servo1");
-
         lf = hardwareMap.dcMotor.get("lf");
         lb = hardwareMap.dcMotor.get("lb");
         rf = hardwareMap.dcMotor.get("rf");
@@ -38,16 +36,18 @@ public class TeleOp_Servo extends LinearOpMode {
         rf.setDirection(DcMotor.Direction.REVERSE);
         rb.setDirection(DcMotor.Direction.REVERSE);
 
+        servo1 = hardwareMap.crservo.get("servo1");
+
         waitForStart();
 
-        while(opModeIsActive()){
+        while (opModeIsActive()) {
 
 //            telemetry.addData("millisecond", System.currentTimeMillis());
 //            telemetry.addData("millisecond", lastTime);
 
             // define slow drive
-            if (gamepad1.right_bumper){
-                if (System.currentTimeMillis() - lastTime > timeElapsed){
+            if (gamepad1.right_bumper) {
+                if (System.currentTimeMillis() - lastTime > timeElapsed) {
                     driveFactor = switchDrive(driveFactor);
                     lastTime = System.currentTimeMillis();
                 }
@@ -82,7 +82,6 @@ public class TeleOp_Servo extends LinearOpMode {
 
             telemetry.addData("servo1's power is set to 1", "running");
             telemetry.update();
-
         }
     }
 

@@ -36,7 +36,7 @@ public class Test_TeleOp extends LinearOpMode{
         rb.setDirection(DcMotor.Direction.REVERSE);
 
         waitForStart();
-        while(opModeIsActive()){
+        while (opModeIsActive()) {
 
 //            telemetry.addData("millisecond", System.currentTimeMillis());
 //            telemetry.addData("millisecond", lastTime);
