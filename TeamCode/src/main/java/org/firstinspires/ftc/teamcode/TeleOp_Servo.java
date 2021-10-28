@@ -68,19 +68,27 @@ public class TeleOp_Servo extends LinearOpMode {
             rf.setPower(finalRight);
             rb.setPower(finalRight);
 
+            // triggers
+            if (gamepad1.left_trigger != 0) {
+                servo1.setDirection(CRServo.Direction.REVERSE);
+                servo1.setPower(1);
+
+                telemetry.addData("servo1's power is set to 1", "running");
+                telemetry.update();
+            }
+            if (gamepad1.right_trigger != 0) {
+                servo1.setPower(1);
+
+                telemetry.addData("servo1's power is set to 1; reversed", "running");
+                telemetry.update();
+            }
+
             // add telemetry
             telemetry.addData("left power", finalLeft);
             telemetry.addData("right power", finalRight);
             telemetry.update();
 
-            // servo
             telemetry.addData("opModeIsActive", opModeIsActive());
-            telemetry.update();
-
-            servo1.setDirection(CRServo.Direction.REVERSE);
-            servo1.setPower(1);
-
-            telemetry.addData("servo1's power is set to 1", "running");
             telemetry.update();
         }
     }
