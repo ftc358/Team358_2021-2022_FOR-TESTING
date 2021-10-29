@@ -74,8 +74,7 @@ public class TeleOp_Servo extends LinearOpMode {
                 servo1.setPower(0);
             }
             else if (gamepad1.left_trigger != 0) {
-                servo1.setDirection(CRServo.Direction.REVERSE);
-                servo1.setPower(1);
+                servo1.setPower(-1);
 
                 telemetry.addData("servo1's power is set to 1", "running");
                 telemetry.update();
