@@ -9,7 +9,7 @@ public class KevinTest_Autonomous extends LinearOpMode {
     public DcMotor motor1;
 
     public void runOpMode() throws InterruptedException {
-        motor1 = hardwareMap.dcMotor.get("motor1");
+        motor1 = hardwareMap.dcMotor.get("mot or1");
 
         waitForStart();
 
