@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.CRServo;
 
 public abstract class RobotMain358 extends LinearOpMode {
 
@@ -10,10 +9,6 @@ public abstract class RobotMain358 extends LinearOpMode {
     protected DcMotor lb;
     protected DcMotor rf;
     protected DcMotor rb;
-
-    protected CRServo carouselServo;
-
-    protected CRServo slideServo;
 
     public double driveFactor = 1;
     public long lastTime = System.currentTimeMillis();
@@ -24,9 +19,6 @@ public abstract class RobotMain358 extends LinearOpMode {
         lb = hardwareMap.dcMotor.get("lb");
         rf = hardwareMap.dcMotor.get("rf");
         rb = hardwareMap.dcMotor.get("rb");
-
-        carouselServo = hardwareMap.crservo.get("carouselServo");
-        slideServo = hardwareMap.crservo.get("slideServo");
 
         lf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         lb.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -50,5 +42,4 @@ public abstract class RobotMain358 extends LinearOpMode {
         }
         return df;
     }
-
 }
