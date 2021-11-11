@@ -9,8 +9,7 @@ public class Autonomous358 extends RobotMain358{
         waitForStart();
 
         while (opModeIsActive()) {
-            int inches = 10;
-            double FORWARD_DISTANCE = inches * 9; // inches * FORWARD_ADJUST
+            forward(10);
 
         }
     }

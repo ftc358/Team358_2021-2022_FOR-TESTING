@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 public abstract class RobotMain358 extends LinearOpMode {
@@ -8,6 +9,7 @@ public abstract class RobotMain358 extends LinearOpMode {
     protected DcMotor lb;
     protected DcMotor rf;
     protected DcMotor rb;
+    protected DcMotor slideMotor;
     protected CRServo crServo;
     protected CRServo slideServo;
 
@@ -15,7 +17,7 @@ public abstract class RobotMain358 extends LinearOpMode {
     public long lastTime = System.currentTimeMillis();
     public int timeElapsed = 2000; // this is in milliseconds
 
-    final double FORWARD_DRIVE_FACTOR = 1;
+    final double FORWARD_DRIVE_FACTOR = 1000;
     final double TURN_DRIVE_FACTOR = 1;
 
     public void initialize() throws InterruptedException{
@@ -24,6 +26,7 @@ public abstract class RobotMain358 extends LinearOpMode {
         rf = hardwareMap.dcMotor.get("rf");
         rb = hardwareMap.dcMotor.get("rb");
 
+        slideMotor = hardwareMap.dcMotor.get("slideMotor");
         crServo = hardwareMap.crservo.get("crServo");
         slideServo = hardwareMap.crservo.get("slideServo");
 
@@ -50,7 +53,7 @@ public abstract class RobotMain358 extends LinearOpMode {
         return df;
     }
 
-    public void forward (int GO_DISTANCE){
+    public void forward (int inch){
         //Reset Encoders
         lf.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         lb.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -58,10 +61,10 @@ public abstract class RobotMain358 extends LinearOpMode {
         rb.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         //Set Target Position
-        lf.setTargetPosition((int) ((lf.getCurrentPosition() + GO_DISTANCE) * FORWARD_DRIVE_FACTOR));
-        lb.setTargetPosition((int) ((lf.getCurrentPosition() + GO_DISTANCE) * FORWARD_DRIVE_FACTOR));
-        rf.setTargetPosition((int) ((lf.getCurrentPosition() + GO_DISTANCE) * FORWARD_DRIVE_FACTOR));
-        rb.setTargetPosition((int) ((lf.getCurrentPosition() + GO_DISTANCE) * FORWARD_DRIVE_FACTOR));
+        lf.setTargetPosition((int) ((lf.getCurrentPosition() + inch) * FORWARD_DRIVE_FACTOR));
+        lb.setTargetPosition((int) ((lf.getCurrentPosition() + inch) * FORWARD_DRIVE_FACTOR));
+        rf.setTargetPosition((int) ((lf.getCurrentPosition() + inch) * FORWARD_DRIVE_FACTOR));
+        rb.setTargetPosition((int) ((lf.getCurrentPosition() + inch) * FORWARD_DRIVE_FACTOR));
 
         //Set Drive Power
         lf.setPower(1);
