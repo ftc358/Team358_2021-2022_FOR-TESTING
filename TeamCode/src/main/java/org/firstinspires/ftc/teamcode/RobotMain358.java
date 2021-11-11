@@ -9,7 +9,7 @@ public abstract class RobotMain358 extends LinearOpMode {
     protected DcMotor lb;
     protected DcMotor rf;
     protected DcMotor rb;
-    protected CRServo carouselServo;
+    protected CRServo crServo;
     protected CRServo slideServo;
 
     public double driveFactor = 1; //for TeleOp
@@ -25,7 +25,7 @@ public abstract class RobotMain358 extends LinearOpMode {
         rf = hardwareMap.dcMotor.get("rf");
         rb = hardwareMap.dcMotor.get("rb");
 
-        carouselServo = hardwareMap.crservo.get("carouselServo");
+        crServo = hardwareMap.crservo.get("crServo");
         slideServo = hardwareMap.crservo.get("slideServo");
 
         lf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
