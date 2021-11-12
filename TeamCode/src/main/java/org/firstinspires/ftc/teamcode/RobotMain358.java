@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import java.lang.*;
 
 public abstract class RobotMain358 extends LinearOpMode {
     protected DcMotor lf;
@@ -12,13 +13,14 @@ public abstract class RobotMain358 extends LinearOpMode {
     protected DcMotor slideMotor;
     protected CRServo crServo;
     protected CRServo slideServo;
+    protected CRServo intakeServo;
 
-    public double driveFactor = 1; //for TeleOp
+    public double driveFactor = 0.7; //for TeleOp
     public long lastTime = System.currentTimeMillis();
     public int timeElapsed = 2000; // this is in milliseconds
 
-    final double FORWARD_DRIVE_FACTOR = 1000;
-    final double TURN_DRIVE_FACTOR = 1;
+    final double DRIVE_FACTOR = 1000;
+    final double TURN_FACTOR = 200;
 
     public void initialize() throws InterruptedException{
         lf = hardwareMap.dcMotor.get("lf");
@@ -29,18 +31,19 @@ public abstract class RobotMain358 extends LinearOpMode {
         slideMotor = hardwareMap.dcMotor.get("slideMotor");
         crServo = hardwareMap.crservo.get("crServo");
         slideServo = hardwareMap.crservo.get("slideServo");
+        intakeServo = hardwareMap.crservo.get("intakeServo");
 
         lf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         lb.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rb.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rb.setZeroPowerBehavior(DcMotor. ZeroPowerBehavior.BRAKE);
 
         rf.setDirection(DcMotor.Direction.REVERSE);
         rb.setDirection(DcMotor.Direction.REVERSE);
     }
 
     // TeleOp Switch Drive
-    public double switchDrive(double df){
+    public double switchDriveUp(double df){
         if (df == 0.3) {
             return 0.7;
         }
@@ -48,12 +51,25 @@ public abstract class RobotMain358 extends LinearOpMode {
             return 1;
         }
         else if (df == 1){
-            return 0.3;
+            return 1;
         }
         return df;
     }
 
-    public void forward (int inch){
+    public double switchDriveDown(double df){
+        if (df == 0.3) {
+            return 0.3;
+        }
+        else if (df == 0.7){
+            return 0.3;
+        }
+        else if (df == 1){
+            return 0.7;
+        }
+        return df;
+    }
+
+    public void forward (int inch, double power){
         //Reset Encoders
         lf.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         lb.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -61,16 +77,16 @@ public abstract class RobotMain358 extends LinearOpMode {
         rb.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         //Set Target Position
-        lf.setTargetPosition((int) ((lf.getCurrentPosition() + inch) * FORWARD_DRIVE_FACTOR));
-        lb.setTargetPosition((int) ((lf.getCurrentPosition() + inch) * FORWARD_DRIVE_FACTOR));
-        rf.setTargetPosition((int) ((lf.getCurrentPosition() + inch) * FORWARD_DRIVE_FACTOR));
-        rb.setTargetPosition((int) ((lf.getCurrentPosition() + inch) * FORWARD_DRIVE_FACTOR));
+        lf.setTargetPosition((int) (inch * DRIVE_FACTOR));
+        lb.setTargetPosition((int) (inch * DRIVE_FACTOR));
+        rf.setTargetPosition((int) (inch * DRIVE_FACTOR));
+        rb.setTargetPosition((int) (inch * DRIVE_FACTOR));
 
         //Set Drive Power
-        lf.setPower(1);
-        lb.setPower(1);
-        rf.setPower(1);
-        rb.setPower(1);
+        lf.setPower(power);
+        lb.setPower(power);
+        rf.setPower(power);
+        rb.setPower(power);
 
         //Set to RUN_TO_POSITION mode
         lf.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -83,7 +99,7 @@ public abstract class RobotMain358 extends LinearOpMode {
         }
     }
 
-    public void turn (int GO_DISTANCE){
+    public void turn (int degree, double power){
         //Reset Encoders
         lf.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         lb.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -91,16 +107,16 @@ public abstract class RobotMain358 extends LinearOpMode {
         rb.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         //Set Target Position
-        lf.setTargetPosition((int) ((lf.getCurrentPosition() + GO_DISTANCE) * TURN_DRIVE_FACTOR));
-        lb.setTargetPosition((int) ((lf.getCurrentPosition() + GO_DISTANCE) * TURN_DRIVE_FACTOR));
-        rf.setTargetPosition((int) ((lf.getCurrentPosition() + GO_DISTANCE) * TURN_DRIVE_FACTOR));
-        rb.setTargetPosition((int) ((lf.getCurrentPosition() + GO_DISTANCE) * TURN_DRIVE_FACTOR));
+        lf.setTargetPosition((int) (degree * TURN_FACTOR));
+        lb.setTargetPosition((int) (degree * TURN_FACTOR));
+        rf.setTargetPosition((int) (degree * TURN_FACTOR));
+        rb.setTargetPosition((int) (degree * TURN_FACTOR));
 
         //Set Drive Power
-        lf.setPower(1);
-        lb.setPower(1);
-        rf.setPower(-1);
-        rb.setPower(-1);
+        lf.setPower(power);
+        lb.setPower(power);
+        rf.setPower(-power);
+        rb.setPower(-power);
 
         //Set to RUN_TO_POSITION mode
         lf.setMode(DcMotor.RunMode.RUN_TO_POSITION);
