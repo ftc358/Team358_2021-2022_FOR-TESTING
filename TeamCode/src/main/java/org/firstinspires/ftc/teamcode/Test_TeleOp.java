@@ -15,7 +15,7 @@ public class Test_TeleOp extends RobotMain358{
 //            telemetry.addData("millisecond", lastTime);
 
             // define slow drive
-            if (gamepad1.right_bumper){
+            if (gamepad1.right_trigger>0.5){
                 if (System.currentTimeMillis() - lastTime > timeElapsed){
                     driveFactor = switchDriveUp(driveFactor);
                     lastTime = System.currentTimeMillis();
@@ -23,7 +23,7 @@ public class Test_TeleOp extends RobotMain358{
             }
 
             // define slow drive
-            if (gamepad1.left_bumper){
+            if (gamepad1.left_trigger>0.5){
                 if (System.currentTimeMillis() - lastTime > timeElapsed){
                     driveFactor = switchDriveDown(driveFactor);
                     lastTime = System.currentTimeMillis();
@@ -31,30 +31,30 @@ public class Test_TeleOp extends RobotMain358{
             }
 
             // add telemetry
-            telemetry.addData("precision status", driveFactor);
+            telemetry.addData("drive factor", driveFactor);
 
             // define drive power
-            double leftDrive = gamepad1.left_stick_y;
-            double rightDrive = gamepad1.right_stick_y;
-            double finalLeft = leftDrive * driveFactor;
-            double finalRight = rightDrive * driveFactor;
+            double fwd = gamepad1.left_stick_y;
+            double turn = 0.7 * gamepad1.right_stick_x;
 
             // set motors to drive power
-            lf.setPower(finalLeft);
-            lb.setPower(finalLeft);
-            rf.setPower(finalRight);
-            rb.setPower(finalRight);
+            lf.setPower(driveFactor * (fwd + turn));
+            lb.setPower(driveFactor * (fwd + turn));
+            rf.setPower(driveFactor * (fwd - turn));
+            rb.setPower(driveFactor * (fwd - turn));
 
             // add telemetry
-            telemetry.addData("left power", finalLeft);
-            telemetry.addData("right power", finalRight);
+            telemetry.addData("forward power", fwd);
+            telemetry.addData("turn power", turn);
 
             //slideMotor
-            if (gamepad1.dpad_left || gamepad1.dpad_right){ //stay there, but still needs constant power
-                slideMotor.setPower(-0.2);
-            } else if (gamepad1.dpad_down) { //down
+//            if (gamepad1.dpad_left || gamepad1.dpad_right){ //stay there, but still needs constant power
+//                slideMotor.setPower(-0.2);
+            slideMotor.setPower(-0.2);
+            while (gamepad1.dpad_down) { //down
                 slideMotor.setPower(0);
-            } else if (gamepad1.dpad_up) { //up
+            }
+            while (gamepad1.dpad_up) { //up
                 slideMotor.setPower(-0.4);
             }
             telemetry.addData("slide encoder", slideMotor.getCurrentPosition());
@@ -81,7 +81,7 @@ public class Test_TeleOp extends RobotMain358{
             }
 
             // intakeServo
-            if (gamepad2.left_bumper && gamepad2.right_bumper){
+            if (gamepad2.left_trigger!=0 || gamepad2.right_trigger!=0){
                 intakeServo.setPower(0);
             } else if (gamepad2.left_bumper) {
                 intakeServo.setPower(1);

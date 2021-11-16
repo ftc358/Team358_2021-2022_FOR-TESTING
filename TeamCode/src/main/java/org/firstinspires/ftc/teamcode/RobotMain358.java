@@ -17,9 +17,9 @@ public abstract class RobotMain358 extends LinearOpMode {
 
     public double driveFactor = 0.7; //for TeleOp
     public long lastTime = System.currentTimeMillis();
-    public int timeElapsed = 2000; // this is in milliseconds
+    public int timeElapsed = 1000; // this is in milliseconds
 
-    final double DRIVE_FACTOR = 1000;
+    final double DRIVE_FACTOR = 100;
     final double TURN_FACTOR = 200;
 
     public void initialize() throws InterruptedException{
@@ -38,8 +38,8 @@ public abstract class RobotMain358 extends LinearOpMode {
         rf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rb.setZeroPowerBehavior(DcMotor. ZeroPowerBehavior.BRAKE);
 
-        rf.setDirection(DcMotor.Direction.REVERSE);
-        rb.setDirection(DcMotor.Direction.REVERSE);
+        lf.setDirection(DcMotor.Direction.REVERSE);
+        lb.setDirection(DcMotor.Direction.REVERSE);
     }
 
     // TeleOp Switch Drive
@@ -70,6 +70,7 @@ public abstract class RobotMain358 extends LinearOpMode {
     }
 
     public void forward (int inch, double power){
+        int ticks = (int) (inch * DRIVE_FACTOR);
         //Reset Encoders
         lf.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         lb.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -77,16 +78,16 @@ public abstract class RobotMain358 extends LinearOpMode {
         rb.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         //Set Target Position
-        lf.setTargetPosition(lf.getCurrentPosition() + (int) (inch * DRIVE_FACTOR));
-        lb.setTargetPosition(lb.getCurrentPosition() + (int) (inch * DRIVE_FACTOR));
-        rf.setTargetPosition(rf.getCurrentPosition() + (int) (inch * DRIVE_FACTOR));
-        rb.setTargetPosition(rb.getCurrentPosition() + (int) (inch * DRIVE_FACTOR));
+        lf.setTargetPosition(lf.getCurrentPosition() + ticks);
+        lb.setTargetPosition(lb.getCurrentPosition() + ticks);
+        rf.setTargetPosition(rf.getCurrentPosition() + ticks);
+        rb.setTargetPosition(rb.getCurrentPosition() + ticks);
 
         //Set Drive Power
-        lf.setPower(-power);
-        lb.setPower(-power);
-        rf.setPower(-power);
-        rb.setPower(-power);
+        lf.setPower(-power * 0.25);
+        lb.setPower(power);
+        rf.setPower(-power * 0.25);
+        rb.setPower(power);
 
         //Set to RUN_TO_POSITION mode
         lf.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -96,9 +97,9 @@ public abstract class RobotMain358 extends LinearOpMode {
 
         while (lf.isBusy() && lb.isBusy() && rf.isBusy() && rb.isBusy()){
             telemetry.addData("lf", lf.getCurrentPosition());
-            telemetry.addData("rf", rf.getCurrentPosition());
+            telemetry.addData("lf", lf.getTargetPosition());
             telemetry.addData("lb", lb.getCurrentPosition());
-            telemetry.addData("rb", rb.getCurrentPosition());
+            telemetry.addData("lb", lb.getTargetPosition());
             telemetry.update();
             //Wait Until Target Position is Reached
         }
