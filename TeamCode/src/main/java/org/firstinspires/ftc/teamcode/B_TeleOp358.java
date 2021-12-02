@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 @TeleOp
-public class A_TeleOp358 extends RobotMain358{
+public class B_TeleOp358 extends RobotMain358{
 
     public void runOpMode() throws InterruptedException {
 
