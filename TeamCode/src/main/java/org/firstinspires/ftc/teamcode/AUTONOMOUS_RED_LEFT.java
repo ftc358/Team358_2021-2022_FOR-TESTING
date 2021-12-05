@@ -31,7 +31,7 @@ public class AUTONOMOUS_RED_LEFT extends RobotMain358{
             forward(15, 0.3);                 // go forward a little bit
             turn(80,0.2);                  // face towards the crater
 
-            slide(300);                           // lift the slide up
+            slide(500);                           // lift the slide up
             forward(90, 1);                 // dash!!!
 
             done = true;

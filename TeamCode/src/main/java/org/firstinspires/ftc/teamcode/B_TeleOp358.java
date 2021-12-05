@@ -79,7 +79,7 @@ public class B_TeleOp358 extends RobotMain358{
                                                                                                 //
             // up                                                                               //
             while (gamepad2.dpad_up) {                                                          //
-                if (slideMotor.getCurrentPosition() >= 1200){                                   //
+                if (slideMotor.getCurrentPosition() >= 1700){                                   //
                     slideMotor.setPower(0);                                                     //
                 } else {                                                                        //
                     slideMotor.setPower(0.5);                                                   //

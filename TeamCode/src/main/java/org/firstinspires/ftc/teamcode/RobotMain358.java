@@ -171,7 +171,11 @@ public abstract class RobotMain358 extends LinearOpMode {
     }
 
     public void slide(int position){
-
+        /**
+         * LEVEL 1 = 500
+         * LEVEL 2 = 1000
+         * MAX / LEVEL 3 = 1700
+         * */
         //Set Target Position
         slideMotor.setTargetPosition(slideMotor.getCurrentPosition() + position);
 
