@@ -14,12 +14,12 @@ public abstract class RobotMain358 extends LinearOpMode {
     protected DcMotor crMotor;
     protected CRServo intakeServo;
 
-    public double driveFactor = 0.2; //for TeleOp
+    public double driveFactor = 0.5; //for TeleOp
     public long lastTime = System.currentTimeMillis();
     public int timeElapsed = 1000; // this is in milliseconds
 
     final double DRIVE_FACTOR = 30 * (10/9.2) * (10/10.2);
-    final double TURN_FACTOR = 5 * (90.0/98.5);
+    final double TURN_FACTOR = 5 * (90.0/95);
 
     public void TEST_CHASSIS_INITIALIZE() throws InterruptedException{
         lf = hardwareMap.dcMotor.get("lf");
@@ -27,8 +27,11 @@ public abstract class RobotMain358 extends LinearOpMode {
         rf = hardwareMap.dcMotor.get("rf");
         rb = hardwareMap.dcMotor.get("rb");
 
+        intakeServo = hardwareMap.crservo.get("intakeServo");
+
         slideMotor = hardwareMap.dcMotor.get("slideMotor");
         slideMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
         crMotor = hardwareMap.dcMotor.get("crMotor");
         crMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
@@ -143,6 +146,48 @@ public abstract class RobotMain358 extends LinearOpMode {
             //Wait Until Target Position is Reached
         }
         sleep(500);
+    }
+
+    public void carousel(String state){
+
+        //Reset Encoders
+        crMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        //Set Target Position
+        crMotor.setTargetPosition(crMotor.getCurrentPosition() + 3000);
+
+        //Set Drive Power
+        if (state == "red") {
+            crMotor.setPower(0.3);
+        } else if (state == "blue") {
+            crMotor.setPower(-0.3);
+        }
+
+        //Set to RUN_TO_POSITION mode
+        crMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        while (crMotor.isBusy()){
+        }
+    }
+
+    public void slide(int position){
+
+        //Set Target Position
+        slideMotor.setTargetPosition(slideMotor.getCurrentPosition() + position);
+
+        //Set Drive Power
+        if (position > slideMotor.getCurrentPosition()) {
+            slideMotor.setPower(0.5);
+        } else {
+            slideMotor.setPower(0.3);
+        }
+
+
+        //Set to RUN_TO_POSITION mode
+        slideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        while (crMotor.isBusy()){
+        }
     }
 
 }

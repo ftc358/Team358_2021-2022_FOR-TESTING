@@ -53,9 +53,9 @@ public class B_TeleOp358 extends RobotMain358{
             /** CAROUSEL MOTORS **/                                                             //
             crMotor.setPower(0);                                                                //
             while (gamepad2.a) {                                                                //
-                crMotor.setPower(-0.5);                                                         //
+                crMotor.setPower(-0.3);                                                         //
             } while (gamepad2.y) {                                                              //
-                crMotor.setPower(0.5);                                                          //
+                crMotor.setPower(0.3);                                                          //
             }                                                                                   //
                                                                                                 //
                                                                                                 //
@@ -63,7 +63,7 @@ public class B_TeleOp358 extends RobotMain358{
             /** SLIDE MOTORS **/                                                                //
             // reset button                                                                     //
             slideMotor.setPower(0);                                                             //
-            if (gamepad2.dpad_left || gamepad2.dpad_right) {                                    //
+            if (gamepad2.left_bumper && gamepad2.right_bumper) {                                //
                 slideMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);                     //
                 slideMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);                        //
             }                                                                                   //
@@ -73,16 +73,16 @@ public class B_TeleOp358 extends RobotMain358{
                 if (slideMotor.getCurrentPosition() <= 0){                                      //
                     slideMotor.setPower(0);                                                     //
                 } else if (slideMotor.getCurrentPosition() > 0) {                               //
-                    slideMotor.setPower(-0.4);                                                  //
+                    slideMotor.setPower(-0.3);                                                  //
                 }                                                                               //
             }                                                                                   //
                                                                                                 //
             // up                                                                               //
             while (gamepad2.dpad_up) {                                                          //
-                if (slideMotor.getCurrentPosition() >= 2150){                                   //
+                if (slideMotor.getCurrentPosition() >= 1200){                                   //
                     slideMotor.setPower(0);                                                     //
-                } else if (slideMotor.getCurrentPosition() < 0) {                               //
-                    slideMotor.setPower(0.4);                                                   //
+                } else {                                                                        //
+                    slideMotor.setPower(0.5);                                                   //
                 }                                                                               //
             }                                                                                   //
                                                                                                 //
@@ -92,6 +92,15 @@ public class B_TeleOp358 extends RobotMain358{
                                                                                                 //
                                                                                                 //
             /** INTAKE **/                                                                      //
+            intakeServo.setPower(0);                                                            //
+            // out                                                                              //
+            while (gamepad2.left_trigger > 0.2) {                                               //
+                intakeServo.setPower(0.3);                                                      //
+            }                                                                                   //
+            // in                                                                               //
+            while (gamepad2.right_trigger > 0.2){                                               //
+                intakeServo.setPower(-1);                                                       //
+            }                                                                                   //
                                                                                                 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
         }
