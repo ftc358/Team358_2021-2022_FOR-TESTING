@@ -18,8 +18,19 @@ public class AUTONOMOUS_RED_PUT_PARK extends RobotMain358{
 
             slide(300);
             forward(15, 0.2);                 // go forward a little bit
-            slide(1700);                           // lift the slide up
-            
+            slide(1400);                           // lift the slide up
+            telemetry.addData("slide status", "done");
+            telemetry.update();
+
+            forward(2, 0.2);
+
+            telemetry.addData("forward status ", "done");
+            telemetry.update();
+            intake();
+
+            slide(500);
+            turn(90, 0.2);
+            forward(70, 0.8);               //dash!!!
 
             done = true;
         }

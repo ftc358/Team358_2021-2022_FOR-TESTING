@@ -182,15 +182,32 @@ public abstract class RobotMain358 extends LinearOpMode {
         //Set Drive Power
         if (position > slideMotor.getCurrentPosition()) {
             slideMotor.setPower(0.5);
-        } else {
-            slideMotor.setPower(0.3);
+        } else if (position < slideMotor.getCurrentPosition()){
+            slideMotor.setPower(-0.3);
         }
 
 
         //Set to RUN_TO_POSITION mode
         slideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
+        while (slideMotor.isBusy()){
+        }
+    }
+
+    public void intake (){
+        //Reset Encoders
+        crMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        //Set Target Position
+        crMotor.setTargetPosition(crMotor.getCurrentPosition() + 2000);
+
+        crMotor.setPower(0.5);
+
+        //Set to RUN_TO_POSITION mode
+        crMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
         while (crMotor.isBusy()){
+            intakeServo.setPower(0.3);
         }
     }
 

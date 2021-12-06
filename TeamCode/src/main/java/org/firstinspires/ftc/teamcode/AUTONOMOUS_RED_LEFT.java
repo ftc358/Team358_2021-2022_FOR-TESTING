@@ -23,7 +23,7 @@ public class AUTONOMOUS_RED_LEFT extends RobotMain358{
             forward(2,0.2);
             done = true;
 
-            carousel("blue");                                  // turn the carousel
+            carousel("red");                                  // turn the carousel
 
             forward(-5, 0.2);                 // back off a little bit
             turn(90, 0.2);                 // return to facing front

@@ -53,9 +53,9 @@ public class B_TeleOp358 extends RobotMain358{
             /** CAROUSEL MOTORS **/                                                             //
             crMotor.setPower(0);                                                                //
             while (gamepad2.a) {                                                                //
-                crMotor.setPower(-0.3);                                                         //
+                crMotor.setPower(-0.4);                                                         //
             } while (gamepad2.y) {                                                              //
-                crMotor.setPower(0.3);                                                          //
+                crMotor.setPower(0.4);                                                          //
             }                                                                                   //
                                                                                                 //
                                                                                                 //
@@ -79,7 +79,7 @@ public class B_TeleOp358 extends RobotMain358{
                                                                                                 //
             // up                                                                               //
             while (gamepad2.dpad_up) {                                                          //
-                if (slideMotor.getCurrentPosition() >= 1700){                                   //
+                if (slideMotor.getCurrentPosition() >= 2000){                                   //
                     slideMotor.setPower(0);                                                     //
                 } else {                                                                        //
                     slideMotor.setPower(0.5);                                                   //
