@@ -18,9 +18,9 @@ public class ServoTest extends LinearOpMode {
         while (opModeIsActive()) {
             servo1.setPower(0);
             while (gamepad1.a) {
-                servo1.setPower(0.7);
+                servo1.setPower(0.75);
             } while (gamepad1.b){
-                servo1.setPower(-0.7);
+                servo1.setPower(-0.75);
             }
         }
     }
