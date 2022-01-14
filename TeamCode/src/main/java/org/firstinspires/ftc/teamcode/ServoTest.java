@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.CRServo;
 public class ServoTest extends LinearOpMode {
     public CRServo servo1;
 
-    public void runOpMode() throws InterruptedException {
+    public void runOpMode() throws InterruptedException 
         servo1 = hardwareMap.crservo.get("servo1");
 
         waitForStart();
