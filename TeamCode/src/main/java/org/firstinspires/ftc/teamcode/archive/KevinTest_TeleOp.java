@@ -1,17 +1,21 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.archive;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import java.util.List;
 
-@Autonomous
-public class KevinTest_Autonomous extends LinearOpMode {
-    public DcMotor motor1;
+@TeleOp
+@Disabled
+public class KevinTest_TeleOp extends LinearOpMode {
+
+    private DcMotor motor1;
 
     public void runOpMode() throws InterruptedException {
-        motor1 = hardwareMap.dcMotor.get("motor1");
 
-        waitForStart();
+        motor1 = hardwareMap.dcMotor.get("Motor1");
 
         while (opModeIsActive()) {
             int inches = 10;
@@ -32,10 +36,7 @@ public class KevinTest_Autonomous extends LinearOpMode {
             //Set to RUN_TO_POSITION mode
             motor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-//            private String currentPosition = Integer.toString(motor1.getCurrentPosition());
-
             telemetry.addData("motor1's power is set to 1", "running");
-            telemetry.addData("Current Position", motor1.getCurrentPosition());
             telemetry.update();
 
             while (motor1.isBusy()) {

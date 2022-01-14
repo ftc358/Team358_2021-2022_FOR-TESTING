@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.archive;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
@@ -18,6 +18,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
 import java.util.Locale;
 
 @TeleOp
+@Disabled
 public class IMU_TEST extends LinearOpMode
 {
     // The IMU sensor object
