@@ -3,6 +3,8 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
+
 import java.lang.*;
 
 public abstract class RobotMain358 extends LinearOpMode {
@@ -13,6 +15,7 @@ public abstract class RobotMain358 extends LinearOpMode {
     protected DcMotor slideMotor;
     protected DcMotor crMotor;
     protected CRServo intakeServo;
+    protected CRServo blackBox;
 
     public double driveFactor = 0.5; //for TeleOp
     public long lastTime = System.currentTimeMillis();
@@ -27,14 +30,6 @@ public abstract class RobotMain358 extends LinearOpMode {
         rf = hardwareMap.dcMotor.get("rf");
         rb = hardwareMap.dcMotor.get("rb");
 
-        intakeServo = hardwareMap.crservo.get("intakeServo");
-
-        slideMotor = hardwareMap.dcMotor.get("slideMotor");
-        slideMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
-        crMotor = hardwareMap.dcMotor.get("crMotor");
-        crMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
         lf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         lb.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -42,7 +37,19 @@ public abstract class RobotMain358 extends LinearOpMode {
 
         rf.setDirection(DcMotor.Direction.REVERSE);
         rb.setDirection(DcMotor.Direction.REVERSE);
+
+        slideMotor = hardwareMap.dcMotor.get("slideMotor");
+        slideMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         slideMotor.setDirection(DcMotor.Direction.REVERSE);
+        slideMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        slideMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        crMotor = hardwareMap.dcMotor.get("crMotor");
+        crMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        intakeServo = hardwareMap.crservo.get("intakeServo");
+        blackBox = hardwareMap.crservo.get("blackBox");
+//        blackBox.setPosition(0.538);
     }
 
     // TeleOp Switch Drive
@@ -88,10 +95,10 @@ public abstract class RobotMain358 extends LinearOpMode {
         rb.setTargetPosition(rb.getCurrentPosition() - ticks);
 
         //Set Drive Power
-        lf.setPower(0.5 * power);
-        lb.setPower(0.5 * power);
-        rf.setPower(0.5 * power);
-        rb.setPower(0.5 * power);
+        lf.setPower(power);
+        lb.setPower(power);
+        rf.setPower(power);
+        rb.setPower(power);
 
         //Set to RUN_TO_POSITION mode
         lf.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -126,10 +133,10 @@ public abstract class RobotMain358 extends LinearOpMode {
         rb.setTargetPosition(rb.getCurrentPosition() + ticks);
 
         //Set Drive Power
-        lf.setPower(0.5 * power);
-        lb.setPower(0.5 * power);
-        rf.setPower(0.5 * power);
-        rb.setPower(0.5 * power);
+        lf.setPower(power);
+        lb.setPower(power);
+        rf.setPower(power);
+        rb.setPower(power);
 
         //Set to RUN_TO_POSITION mode
         lf.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -170,7 +177,7 @@ public abstract class RobotMain358 extends LinearOpMode {
         }
     }
 
-    public void slide(int position){
+    public void slideAuto(int position){
         /**
          * LEVEL 1 = 500
          * LEVEL 2 = 1000
@@ -191,23 +198,6 @@ public abstract class RobotMain358 extends LinearOpMode {
         slideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         while (slideMotor.isBusy()){
-        }
-    }
-
-    public void intake (){
-        //Reset Encoders
-        crMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-        //Set Target Position
-        crMotor.setTargetPosition(crMotor.getCurrentPosition() + 2000);
-
-        crMotor.setPower(0.5);
-
-        //Set to RUN_TO_POSITION mode
-        crMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-        while (crMotor.isBusy()){
-            intakeServo.setPower(0.3);
         }
     }
 
