@@ -17,7 +17,7 @@ public class AUTONOMOUS_PARK extends RobotMain358{
             slideMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
 //            slide(500);
-            forward(50, 0.5);               //dash!!!
+            forward(70, 0.5);               //dash!!!
 
             done = true;
         }

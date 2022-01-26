@@ -155,6 +155,44 @@ public abstract class RobotMain358 extends LinearOpMode {
         sleep(500);
     }
 
+    public void strafe (int degree, double power){
+        int ticks = (int) (degree * TURN_FACTOR);
+
+        //Reset Encoders
+        lf.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        lb.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rf.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rb.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        //Set Target Position
+        lf.setTargetPosition(lf.getCurrentPosition() + ticks);
+        lb.setTargetPosition(lb.getCurrentPosition() - ticks);
+        rf.setTargetPosition(rf.getCurrentPosition() - ticks);
+        rb.setTargetPosition(rb.getCurrentPosition() + ticks);
+
+        //Set Drive Power
+        lf.setPower(power);
+        lb.setPower(power);
+        rf.setPower(power);
+        rb.setPower(power);
+
+        //Set to RUN_TO_POSITION mode
+        lf.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        lb.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rf.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rb.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        while (lf.isBusy() && lb.isBusy() && rf.isBusy() && rb.isBusy()){
+            telemetry.addData("lf", -lf.getCurrentPosition());
+            telemetry.addData("rf", -rf.getCurrentPosition());
+            telemetry.addData("lb", -lb.getCurrentPosition());
+            telemetry.addData("rb", -rb.getCurrentPosition());
+            telemetry.update();
+            //Wait Until Target Position is Reached
+        }
+        sleep(500);
+    }
+
     public void carousel(String state){
 
         //Reset Encoders
