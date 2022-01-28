@@ -93,7 +93,10 @@ public class Mec_TeleOp358 extends RobotMain358{
                 } else {                                                                //
                     slideMotor.setPower(0.8);                                           //
                 }                                                                       //
-            }                                                                           //
+            }
+
+            /** DISTANCE SENSORS **/
+            while
                                                                                         //
             telemetry.addData("slide", slideMotor.getCurrentPosition());
 //            telemetry.addData("black box", blackBox.getPosition());
