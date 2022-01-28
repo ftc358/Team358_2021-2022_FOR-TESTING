@@ -50,71 +50,71 @@ public class Mec_TeleOp358 extends RobotMain358{
                                                                                         //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-            /** CAROUSEL MOTORS **/                                                     //
-            crMotor.setPower(0);                                                        //
-            while (gamepad2.a) {                                                        //
-                crMotor.setPower(-0.4);                                                 //
-            } while (gamepad2.y) {                                                      //
-                crMotor.setPower(0.4);                                                  //
-            }                                                                           //
-                                                                                        //
-            /** INTAKE **/                                                              //
-            intakeServo.setPower(0);                                                    //
-            // in                                                                       //
-            while (gamepad1.right_trigger > 0.2) {                                      //
-                intakeServo.setPower(1);                                                //
-            }                                                                           //
-            // out                                                                      //
-            while (gamepad1.left_trigger > 0.2){                                        //
-                intakeServo.setPower(-0.3);                                             //
-            }                                                                           //
-                                                                                        //
-            /** SLIDE MOTORS **/                                                        //
-            // reset button                                                             //
-            slideMotor.setPower(0.1);                                                     //
-            if (gamepad2.left_bumper && gamepad2.right_bumper) {                        //
-                slideMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);             //
-                slideMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);                //
-            }                                                                           //
-                                                                                        //
-            // down                                                                     //
-            while (gamepad2.dpad_down) {                                                //
-                if (slideMotor.getCurrentPosition() <= 0){                              //
-                    slideMotor.setPower(0);                                             //
-                } else {                                                                //
-                    slideMotor.setPower(-0.5);                                          //
-                }                                                                       //
-            }                                                                           //
-                                                                                        //
-            // up                                                                       //
-            while (gamepad2.dpad_up) {                                                  //
-                if (slideMotor.getCurrentPosition() >= 1500){                           //
-                    slideMotor.setPower(0);                                             //
-                } else {                                                                //
-                    slideMotor.setPower(0.8);                                           //
-                }                                                                       //
-            }
-
-            /** DISTANCE SENSORS **/
-            while
-                                                                                        //
-            telemetry.addData("slide", slideMotor.getCurrentPosition());
-//            telemetry.addData("black box", blackBox.getPosition());
-            telemetry.update();
-
-            /** Black Box **/                                                           //
-            // in                                                                       //
-            if (gamepad2.left_stick_y == 0 && gamepad2.right_stick_y == 0){
-                blackBox.setPower(0);
-            }
-            else if (gamepad2.left_stick_y < -0.5 && gamepad2.right_stick_y < -0.5) {                                      //
-                blackBox.setPower(0.3);
-            }                                                                           //
-            // out                                                                      //
-            else if (gamepad2.left_stick_y > 0.5 && gamepad2.right_stick_y > 0.5){                                        //
-                blackBox.setPower(-0.3);                                             //
-            }
-
-        }
-    }
-}
+//            /** CAROUSEL MOTORS **/                                                     //
+//            crMotor.setPower(0);                                                        //
+//            while (gamepad2.a) {                                                        //
+//                crMotor.setPower(-0.4);                                                 //
+//            } while (gamepad2.y) {                                                      //
+//                crMotor.setPower(0.4);                                                  //
+//            }                                                                           //
+//                                                                                        //
+//            /** INTAKE **/                                                              //
+//            intakeServo.setPower(0);                                                    //
+//            // in                                                                       //
+//            while (gamepad1.right_trigger > 0.2) {                                      //
+//                intakeServo.setPower(1);                                                //
+//            }                                                                           //
+//            // out                                                                      //
+//            while (gamepad1.left_trigger > 0.2){                                        //
+//                intakeServo.setPower(-0.3);                                             //
+//            }                                                                           //
+//                                                                                        //
+//            /** SLIDE MOTORS **/                                                        //
+//            // reset button                                                             //
+//            slideMotor.setPower(0.1);                                                     //
+//            if (gamepad2.left_bumper && gamepad2.right_bumper) {                        //
+//                slideMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);             //
+//                slideMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);                //
+//            }                                                                           //
+//                                                                                        //
+//            // down                                                                     //
+//            while (gamepad2.dpad_down) {                                                //
+//                if (slideMotor.getCurrentPosition() <= 0){                              //
+//                    slideMotor.setPower(0);                                             //
+//                } else {                                                                //
+//                    slideMotor.setPower(-0.5);                                          //
+//                }                                                                       //
+//            }                                                                           //
+//                                                                                        //
+//            // up                                                                       //
+//            while (gamepad2.dpad_up) {                                                  //
+//                if (slideMotor.getCurrentPosition() >= 1500){                           //
+//                    slideMotor.setPower(0);                                             //
+//                } else {                                                                //
+//                    slideMotor.setPower(0.8);                                           //
+//                }                                                                       //
+//            }
+//
+//            /** DISTANCE SENSORS **/
+//            while
+//                                                                                        //
+//            telemetry.addData("slide", slideMotor.getCurrentPosition());
+////            telemetry.addData("black box", blackBox.getPosition());
+//            telemetry.update();
+//
+//            /** Black Box **/                                                           //
+//            // in                                                                       //
+//            if (gamepad2.left_stick_y == 0 && gamepad2.right_stick_y == 0){
+//                blackBox.setPower(0);
+//            }
+//            else if (gamepad2.left_stick_y < -0.5 && gamepad2.right_stick_y < -0.5) {                                      //
+//                blackBox.setPower(0.3);
+//            }                                                                           //
+//            // out                                                                      //
+//            else if (gamepad2.left_stick_y > 0.5 && gamepad2.right_stick_y > 0.5){                                        //
+//                blackBox.setPower(-0.3);                                             //
+//            }
+//
+//        }
+//    }
+//}
