@@ -96,7 +96,7 @@ public class Mec_TeleOp358 extends RobotMain358{
 //            }
 //
 //            /** DISTANCE SENSORS **/
-//            while
+//
 //                                                                                        //
 //            telemetry.addData("slide", slideMotor.getCurrentPosition());
 ////            telemetry.addData("black box", blackBox.getPosition());
@@ -114,7 +114,7 @@ public class Mec_TeleOp358 extends RobotMain358{
 //            else if (gamepad2.left_stick_y > 0.5 && gamepad2.right_stick_y > 0.5){                                        //
 //                blackBox.setPower(-0.3);                                             //
 //            }
-//
-//        }
-//    }
-//}
+
+        }
+    }
+}
