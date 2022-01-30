@@ -10,7 +10,7 @@ public class AUTONOMOUS_PARK extends RobotMain358{
 
     public void runOpMode() throws InterruptedException {
 
-        TEST_CHASSIS_INITIALIZE();
+        CHASSIS_INITIALIZE();
 
         waitForStart();
         while (opModeIsActive() && !done) {

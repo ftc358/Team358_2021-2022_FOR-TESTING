@@ -5,6 +5,9 @@ import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.util.ElapsedTime;
+
 
 import java.lang.*;
 
@@ -28,7 +31,12 @@ public abstract class RobotMain358 extends LinearOpMode {
     final double DRIVE_FACTOR = 30 * (10/9.2) * (10/10.2);
     final double TURN_FACTOR = 5 * (90.0/95);
 
-    public void TEST_CHASSIS_INITIALIZE() throws InterruptedException{
+    ElapsedTime runtime = new ElapsedTime();    // Use to determine when end game is starting.
+    final double HALF_TIME = 60.0;              // Wait this many seconds before rumble-alert for half-time.
+    final double END_GAME = 90.0;               // Wait this many seconds before rumble-alert for end-time.
+
+
+    public void CHASSIS_INITIALIZE() throws InterruptedException{
         lf = hardwareMap.dcMotor.get("lf");
         lb = hardwareMap.dcMotor.get("lb");
         rf = hardwareMap.dcMotor.get("rf");
@@ -53,32 +61,31 @@ public abstract class RobotMain358 extends LinearOpMode {
 
         intakeServo = hardwareMap.crservo.get("intakeServo");
         blackBox = hardwareMap.crservo.get("blackBox");
-//        blackBox.setPosition(0.538);
     }
 
     // TeleOp Switch Drive
     public double switchDriveUp(double df){
-        if (df == 0.2) {
-            return 0.5;
+        if (df == 0.3) {
+            return 0.6;
         }
-        else if (df == 0.5){
-            return 0.8;
+        else if (df == 0.6){
+            return 1;
         }
-        else if (df == 0.8){
-            return 0.8;
+        else if (df == 1){
+            return 1;
         }
         return df;
     }
 
     public double switchDriveDown(double df){
-        if (df == 0.2) {
-            return 0.2;
+        if (df == 0.3) {
+            return 0.3;
         }
-        else if (df == 0.5){
-            return 0.2;
+        else if (df == 0.6){
+            return 0.3;
         }
-        else if (df == 0.8){
-            return 0.5;
+        else if (df == 1){
+            return 0.6;
         }
         return df;
     }
