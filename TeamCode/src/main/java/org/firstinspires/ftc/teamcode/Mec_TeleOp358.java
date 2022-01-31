@@ -53,45 +53,48 @@ public class Mec_TeleOp358 extends RobotMain358{
                                                                                         //
             /** CAROUSEL MOTORS **/                                                     //
             crMotor.setPower(0);                                                        //
-            while (gamepad2.a) {                                                        //
+            if (gamepad2.a) {                                                           //
                 crMotor.setPower(-0.45);                                                //
-            } while (gamepad2.y) {                                                      //
+            } else if (gamepad2.y) {                                                    //
                 crMotor.setPower(0.45);                                                 //
+            } else {                                                                    //
+                crMotor.setPower(0);                                                    //
             }                                                                           //
                                                                                         //
             /** INTAKE **/                                                              //
             intakeServo.setPower(0);                                                    //
-            // in                                                                       //
-            while (gamepad1.right_trigger > 0.2) {                                      //
+            if (gamepad1.right_trigger > 0.2) {                                         //
                 intakeServo.setPower(1);                                                //
-            }                                                                           //
-            // out                                                                      //
-            while (gamepad1.left_trigger > 0.2){                                        //
+            } else if (gamepad1.left_trigger > 0.2){                                    //
                 intakeServo.setPower(-0.3);                                             //
+            } else {                                                                    //
+                intakeServo.setPower(0);                                                //
             }                                                                           //
                                                                                         //
             /** SLIDE MOTORS **/                                                        //
             // reset button                                                             //
-            slideMotor.setPower(0.1);                                                   //
+            slideMotor.setPower(slidePower);                                            //
             if (gamepad2.left_bumper && gamepad2.right_bumper) {                        //
                 slideMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);             //
                 slideMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);                //
             }                                                                           //
             // down                                                                     //
-            while (gamepad2.dpad_down) {                                                //
+            if (gamepad2.dpad_down) {                                                   //
                 if (slideMotor.getCurrentPosition() <= 0){                              //
-                    slideMotor.setPower(0);                                             //
+                    slideMotor.setPower(slidePower);                                    //
                 } else {                                                                //
                     slideMotor.setPower(-0.5);                                          //
                 }                                                                       //
             }                                                                           //
             // up                                                                       //
-            while (gamepad2.dpad_up) {                                                  //
+            else if (gamepad2.dpad_up) {                                                //
                 if (slideMotor.getCurrentPosition() >= 1500){                           //
-                    slideMotor.setPower(0);                                             //
+                    slideMotor.setPower(slidePower);                                    //
                 } else {                                                                //
                     slideMotor.setPower(0.8);                                           //
                 }                                                                       //
+            } else {                                                                    //
+                slideMotor.setPower(slidePower);                                        //
             }                                                                           //
                                                                                         //
             /** Black Box **/                                                           //
@@ -122,26 +125,6 @@ public class Mec_TeleOp358 extends RobotMain358{
                 gamepad1.rumble(1000);
                 gamepad2.rumble(1000);
             }
-
-//            if (gamepad1.left_bumper) {
-//                // Left Bumper is being pressed, so send left and right "trigger" values to left and right rumble motors.
-//                gamepad1.rumble(gamepad1.left_trigger, gamepad1.right_trigger, Gamepad.RUMBLE_DURATION_CONTINUOUS);
-//
-//                // Show what is being sent to rumbles
-//                telemetry.addData(">", "Squeeze triggers to control rumbles");
-//                telemetry.addData("> : Rumble", "Left: %.0f%%   Right: %.0f%%", gamepad1.left_trigger * 100, gamepad1.right_trigger * 100);
-//            } else {
-//                // Make sure rumble is turned off when Left Bumper is released (only one time each press)
-//                if (!gamepad1.left_bumper) {
-//                    gamepad1.stopRumble();
-//                }
-//
-//                //  Prompt for manual rumble action
-//                telemetry.addData(">", "Hold Left-Bumper to test Manual Rumble");
-//                telemetry.addData(">", "Press A (Cross) for three blips");
-//                telemetry.addData(">", "Squeeze right trigger slowly for 1 blip");
-//            }
-
         }
     }
 }

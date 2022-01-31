@@ -25,6 +25,7 @@ public abstract class RobotMain358 extends LinearOpMode {
     protected DistanceSensor dsFreight;
 
     public double driveFactor = 0.5; //for TeleOp
+    public final double slidePower = 0.1;
     public long lastTime = System.currentTimeMillis();
     public int timeElapsed = 1000; // this is in milliseconds
 
