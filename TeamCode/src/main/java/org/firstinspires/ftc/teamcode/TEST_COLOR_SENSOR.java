@@ -43,6 +43,7 @@ import com.qualcomm.robotcore.hardware.SwitchableLight;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
+@Disabled
 @TeleOp
     public class TEST_COLOR_SENSOR extends LinearOpMode {
 
